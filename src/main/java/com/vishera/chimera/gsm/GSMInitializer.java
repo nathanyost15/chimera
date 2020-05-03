@@ -1,10 +1,8 @@
 package com.vishera.chimera.gsm;
 
+import com.vishera.chimera.input.Keyboard;
 import lombok.extern.slf4j.Slf4j;
-import org.lwjgl.glfw.GLFWKeyCallback;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.lwjgl.opengl.GL;
 
 import static com.vishera.chimera.constants.Constants.CHIMERA;
 import static org.lwjgl.glfw.GLFW.*;
@@ -23,25 +21,19 @@ public class GSMInitializer {
         var gameWindow = getNewGameWindow(screenWidth, screenHeight);
         setWindowPositionOnScreen(gameWindow, screenWidth, screenHeight);
         setKeyCallbacks(gameWindow);
-        setWindowToForeFront(gameWindow);
+        setWindowInContext(gameWindow);
         gsm.setGameWindow(gameWindow);
     }
 
-    private static void setWindowToForeFront(long gameWindow) {
+    private static void setWindowInContext(long gameWindow) {
         glfwMakeContextCurrent(gameWindow);
         glfwShowWindow(gameWindow);
+        GL.createCapabilities();
     }
 
     private static void setKeyCallbacks(long gameWindow) {
-        glfwSetKeyCallback(gameWindow, new GLFWKeyCallback() {
-            Map<Integer, Boolean> keys = new HashMap<>();
-            @Override
-            public void invoke(long window, int key, int scancode, int action, int mods) {
-                keys.put(key, action != GLFW_RELEASE);
-            }
-        });
+        glfwSetKeyCallback(gameWindow, new Keyboard());
     }
-
     private static void setWindowPositionOnScreen(long gameWindow, int screenWidth, int screenHeight) {
         var screenStruct = glfwGetVideoMode(glfwGetPrimaryMonitor());
         glfwSetWindowPos(gameWindow, (screenStruct.width() - screenWidth) / 2, (screenStruct.height() - screenHeight) / 2);
