@@ -15,14 +15,6 @@ plugins {
     id 'java'
 }
 
-repositories {
-    mavenLocal()
-    mavenCentral()
-    maven { url "https://plugins.gradle.org/m2/" }
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-    jcenter()
-    google()
-}
 dependencies {
     compile group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
     compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.30'
