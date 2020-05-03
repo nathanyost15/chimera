@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL;
 
 import static com.vishera.chimera.constants.Constants.CHIMERA;
 import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 @Slf4j
@@ -29,6 +30,9 @@ public class GSMInitializer {
         glfwMakeContextCurrent(gameWindow);
         glfwShowWindow(gameWindow);
         GL.createCapabilities();
+        glClearColor(0f, 0f, 0f, 0f);
+        glEnable(GL_DEPTH_TEST);
+        log.info("Using OpenGL version: " + glGetString(GL_VERSION));
     }
 
     private static void setKeyCallbacks(long gameWindow) {
