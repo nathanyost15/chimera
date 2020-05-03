@@ -1,6 +1,4 @@
 buildscript {
-    
-
     repositories {
         mavenLocal()
         mavenCentral()
@@ -10,9 +8,25 @@ buildscript {
         google()
     }
     dependencies {
-        
-
     }
+}
+
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "https://plugins.gradle.org/m2/" }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    jcenter()
+    google()
+}
+dependencies {
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.30'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.0'
 }
 
 allprojects {
@@ -36,12 +50,6 @@ allprojects {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
     }
-}
-
-dependencies {
-	compile group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
-    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.30'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.0'
 }
 
 project(":desktop") {
@@ -69,6 +77,5 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         api "com.badlogicgames.ashley:ashley:$ashleyVersion"
         api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-        
     }
 }
