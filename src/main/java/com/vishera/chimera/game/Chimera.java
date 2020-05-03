@@ -1,18 +1,13 @@
 package com.vishera.chimera.game;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vishera.chimera.states.BaseGameState;
+import com.vishera.chimera.gsm.GSM;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.lwjgl.glfw.GLFWVidMode;
-
-import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 @Slf4j
 @Getter
 public class Chimera implements Runnable {
-    private static boolean running;
-    private static long gameWindow;
     private int screenWidth;
     private int screenHeight;
     private boolean fullScreen;
@@ -30,57 +25,12 @@ public class Chimera implements Runnable {
     @Override
     public void run() {
         try {
-            startGame();
-            runGame();
+            log.info("Adding base game state");
+            var gsm = new GSM(screenWidth, screenHeight, fullScreen);
+            gsm.push(new BaseGameState(gsm));
+            gsm.run();
         } catch (Exception exception) {
             log.error("Unhandled exception thrown during run: ", exception);
         }
-    }
-
-    public void stopGame() {
-        log.info("Game requested stop");
-        running = false;
-    }
-
-    public void startGame() {
-        log.info("Starting game");
-        running = true;
-    }
-
-    private void init() throws Exception {
-        log.info("Initializing game");
-        if(!glfwInit()) {
-            throw new Exception("Could not initialize game!");
-        }
-
-        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
-        gameWindow = glfwCreateWindow(screenWidth, screenHeight, "Chimera", NULL, NULL);
-        log.debug("GameWindow index = " + gameWindow);
-
-        var screenStruct = glfwGetVideoMode(glfwGetPrimaryMonitor());
-        glfwSetWindowPos(gameWindow, (screenStruct.width() - screenWidth) / 2, (screenStruct.height() - screenHeight) / 2);
-        glfwMakeContextCurrent(gameWindow);
-        glfwShowWindow(gameWindow);
-    }
-
-    private void runGame() throws Exception{
-        init();
-        log.info("Game loop started");
-        while(running) {
-            update();
-            render();
-            if(glfwWindowShouldClose(gameWindow)) {
-                stopGame();
-            }
-        }
-        log.info("Game loop finished");
-    }
-
-    private void render() {
-        glfwSwapBuffers(gameWindow);
-    }
-
-    private void update() {
-        glfwPollEvents();
     }
 }
