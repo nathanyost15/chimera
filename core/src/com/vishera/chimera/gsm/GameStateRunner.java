@@ -1,14 +1,8 @@
 package com.vishera.chimera.gsm;
 
 public class GameStateRunner {
-    private GameStateManager gsm;
-
-    public GameStateRunner(GameStateManager gsm) {
-        this.gsm = gsm;
-    }
-
     public void run() {
-        var gameState = gsm.getCurrentGameState();
+        var gameState = GSM.getCurrentGameState();
         render(gameState);
         update(gameState);
     }
@@ -16,7 +10,6 @@ public class GameStateRunner {
     private void render(GameState gameState) {
         gameState.render();
     }
-
     private void update(GameState gameState) {
         gameState.update();
     }

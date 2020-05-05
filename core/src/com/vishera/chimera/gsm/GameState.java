@@ -8,11 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @Slf4j
 public abstract class GameState {
-    private GameStateManager gsm;
-
-    public GameState(GameStateManager gsm) {
+    public GameState() {
         log.debug("Initialized state: " + this.getClass().getCanonicalName());
-        this.gsm = gsm;
     }
 
     public abstract void render();
