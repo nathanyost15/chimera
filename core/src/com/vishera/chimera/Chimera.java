@@ -2,11 +2,14 @@ package com.vishera.chimera;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.vishera.chimera.gsm.GSM;
 import com.vishera.chimera.gsm.GameStateRunner;
+import com.vishera.chimera.states.Level_1;
 import com.vishera.chimera.states.MainMenu;
 
 public class Chimera extends ApplicationAdapter {
@@ -17,9 +20,15 @@ public class Chimera extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+		initGameWindow();
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
-		GSM.push(new MainMenu());
+		GSM.push(new Level_1());
+	}
+
+	private void initGameWindow() {
+		Gdx.graphics.setWindowedMode(1920, 1080);
+		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 	}
 
 	@Override
