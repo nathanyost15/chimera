@@ -15,12 +15,6 @@ plugins {
     id 'java'
 }
 
-dependencies {
-    compile group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
-    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.30'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.0'
-}
-
 allprojects {
     apply plugin: "eclipse"
 
@@ -55,8 +49,12 @@ project(":desktop") {
         api "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
         api "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
         api "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
-        
+        compile group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
+        compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.30'
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.0'
     }
+    
+    
 }
 
 project(":core") {
@@ -69,5 +67,8 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         api "com.badlogicgames.ashley:ashley:$ashleyVersion"
         api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        compile group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
+        compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.30'
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.0'
     }
 }
