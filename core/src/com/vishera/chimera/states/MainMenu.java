@@ -14,12 +14,18 @@ public class MainMenu extends GameState {
     }
 
     @Override
-    public void update() {
+    public void update(float deltaTime) {
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
             log.debug("Switching state to level_1");
             GSM.push(new Level_1());
         }
+
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
         }
+    }
+
+    @Override
+    public void dispose() {
+
     }
 }

@@ -18,6 +18,8 @@ public abstract class GSM {
         if(gameStates.size() > 1) {
             log.debug(String.format("Removing game state from GSM %s", gameStates.peek().getClass().getCanonicalName()));
             gameStates.pop();
+            log.debug("Disposing objects");
+            oldGameState.dispose();
         }
         return oldGameState;
     }
